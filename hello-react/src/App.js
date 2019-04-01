@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './App.css'
 import MyName from './MyName';
 import Counter from './Counter';
@@ -13,7 +13,7 @@ class App extends Component {
     };
 
     return (
-      <React.Fragment>
+      <Fragment>
         {/*3강*/}
         <div style={style}>
           hi there
@@ -26,7 +26,7 @@ class App extends Component {
         <MyName /*name="박지수"*//>
 
         <Counter/>
-      </React.Fragment>
+      </Fragment>
     );
   }
 }

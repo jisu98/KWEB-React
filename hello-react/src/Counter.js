@@ -31,6 +31,7 @@ class Counter extends Component {
       this.setState({
           number: 0, 
           foo: {
+              //나머지는 다 그대로 둔다는 뜻
               ...this.state.foo, 
               foobar: 2
           }
