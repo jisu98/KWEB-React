@@ -1,57 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import TodoListTemplate from './components/TodoListTemplate';
 import Form from './components/Form';
 import TodoItemList from './components/TodoItemList';
 
 const App = () => {
-  const [id, setId] = useState(2);
+  const id = useRef(2);
   const [input, setInput] = useState('');
   const [todos, setTodos] = useState([
     { id: 0, text: '숨 쉬기', checked: false }, 
     { id: 1, text: '집에 가기', checked: true}
   ]);
 
-  const handleChange = (e) => {
+  const handleChange = useCallback((e) => {
+    console.log('change');
     setInput(e.target.value); // input 의 다음 바뀔 값
-    
-  };
+  }, []);
 
-  const handleCreate = () => {
+  const handleCreate = useCallback(() => {
+    console.log('create');
       setInput('');
       setTodos(todos.concat({
-        id: id,
+        id: id.current++,
         text: input,
         checked: false
       }));
-      setId(id + 1);
-  };
+  }, [input]);
 
   const handleKeyPress = (e) => {
+    console.log('keypress');
     // 눌려진 키가 Enter 면 handleCreate 호출
     if(e.key === 'Enter') {
       handleCreate();
     }
   };
 
-  const handleToggle = (id) => {
-    // 파라미터로 받은 id 를 가지고 몇번째 아이템인지 찾습니다.
-    const index = todos.findIndex(todo => todo.id === id);
-    const selected = todos[index]; // 선택한 객체
+  const handleToggle = useCallback((id) => {
+    setTodos(todos => todos.map(todo => (todo.id === id ? { ...todo, checked: !todo.checked } : todo)));
+  }, [todos]);
 
-    const nextTodos = [...todos]; // 배열을 복사
-
-    // 기존의 값들을 복사하고, checked 값을 덮어쓰기
-    nextTodos[index] = { 
-      ...selected, 
-      checked: !selected.checked
-    };
-
-    setTodos(nextTodos);
-  };
-
-  const handleRemove = (id) => {
+  const handleRemove = useCallback((id) => {
+    console.log('remove');
     setTodos(todos.filter(todo => todo.id !== id));
-  };
+  }, [todos]);
 
   return (
     <TodoListTemplate form={

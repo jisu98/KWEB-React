@@ -7,6 +7,7 @@ const TodoItem = ({text, checked, id, onToggle, onRemove}) => {
       return this.props.checked !== nextProps.checked;
   }
 */
+  
   return (    
     <div className="todo-item" onClick={() => onToggle(id)}>
       <div className="remove" onClick={(e) => {

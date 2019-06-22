@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "babel": "^6.23.0",
+    "node": "^12.4.0",
+    "redux": "^4.0.1"
+  },
+  "name": "redux",
+  "version": "1.0.0",
+  "main": "index.html",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "scripts": {
+    "start": "nodemon index.html"
+  }
+}
